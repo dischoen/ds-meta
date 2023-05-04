@@ -1,0 +1,10 @@
+#!/bin/bash
+# -*- mode: sh -*-
+
+
+REPOS=$(cat .repos)
+
+for repo in $REPOS; do
+    echo "-- $repo --"
+    git -C $repo "$@"
+done | less
