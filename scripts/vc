@@ -1,10 +1,13 @@
 #!/bin/bash
 # -*- mode: sh -*-
 
+if [ -f .repos ]; then
+    REPOS=$(cat .repos)
+    for repo in $REPOS; do
+        echo "-- $repo --"
+        git -C $repo "$@"
+    done | less
+else
+    git "$@"
+fi
 
-REPOS=$(cat .repos)
-
-for repo in $REPOS; do
-    echo "-- $repo --"
-    git -C $repo "$@"
-done | less

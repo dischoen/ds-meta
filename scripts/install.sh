@@ -4,4 +4,4 @@ if [ ! -d $HOME/bin ]; then
     mkdir $HOME/bin
 fi
 
-cp ./vc $HOME/bin
+ln -s $(readlink -f ./vc) $HOME/bin
