@@ -6,5 +6,9 @@ REPOS=$(cat .repos)
 
 for repo in $REPOS; do
     echo "-- $repo --"
-    git -C $repo "$@"
+    if [ -d $repo ]; then
+        git -C $repo "$@"
+    else
+        echo "  $repo is not available"
+    fi
 done | less
