@@ -1,14 +1,16 @@
 #!/bin/bash
 # -*- mode: sh -*-
 
-
-REPOS=$(cat .repos)
-
-for repo in $REPOS; do
-    echo "-- $repo --"
-    if [ -d $repo ]; then
-        git -C $repo "$@"
-    else
-        echo "  $repo is not available"
-    fi
-done | less
+if [ -f .repos ]; then
+    REPOS=$(cat .repos)
+    for repo in $REPOS; do
+        echo "-- $repo --"
+        if [ -d $repo ]; then
+            git -C $repo "$@"
+        else
+            echo "  $repo is not available"
+        fi            
+    done | less
+else
+    git "$@"
+fi
